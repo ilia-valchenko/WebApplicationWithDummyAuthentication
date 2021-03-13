@@ -19,6 +19,8 @@ namespace WebApplicationWithDummyAuthentication
         // then you may replace built-in IoC container with a third party container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // NOTE: I'm not sure I need to use AddMvc here. It's a REST API service. AddControllers should be enough.
+            //services.AddControllers();
             services.AddMvc();
 
             // .AddAuthentication() adds authentication middleware.
@@ -60,6 +62,9 @@ namespace WebApplicationWithDummyAuthentication
 
             app.UseEndpoints(endpoints =>
             {
+                // MapControllers is enough for RESP API service.
+                // endpoints.MapControllers();
+
                 endpoints.MapControllerRoute("default", "{controller=Person}/{action=GetAsync}");
             });
         }
